@@ -14,6 +14,7 @@ class PairingService
 
   def create_a_date(emp1, emp2)
     @month.coffee_dates.create(employees:[emp1, emp2])
+    email_pairs(emp1, emp2)
     @unpaired_employees -= [emp1]
     @unpaired_employees -= [emp2]
   end
@@ -22,6 +23,11 @@ class PairingService
     emp1 = @unpaired_employees.sample
     emp2 = @unpaired_employees.sample
     create_a_date(emp1, emp2) if good_match?(emp1, emp2)
+  end
+
+  def email_pairs(emp1, emp2)
+    CoffeeMailer.coffee_pairing(emp1, emp2).deliver_now
+    # PairMailerJob.perform_now(emp1, emp2)
   end
 
   def pairs_are_possible?
