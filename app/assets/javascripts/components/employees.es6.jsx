@@ -5,6 +5,7 @@ class Employees extends React.Component{
     
     this.activeEmployees = this.activeEmployees.bind(this);
     this.deactiveEmployees = this.deactiveEmployees.bind(this);
+    this.toggleActiveStatus = this.toggleActiveStatus.bind(this);
     
     this.state={
       employees:[]
@@ -15,6 +16,11 @@ class Employees extends React.Component{
     fetch('/employees')
       .then(res => res.json())
       .then(json => this.setState({employees: json}))
+  }
+  
+  toggleActiveStatus(id, e){
+    e.preventDefault();
+    console.log(id);
   }
   
   activeEmployees(){
@@ -30,11 +36,11 @@ class Employees extends React.Component{
       <div>
         
         <h2>Active Employees</h2>
-        {this.activeEmployees().map(e => <Employee info={e}/>)}
+        {this.activeEmployees().map(e => <Employee key={e.id} info={e} toggleStatus={this.toggleActiveStatus.bind(null, e.id)}/>)}
         <hr />
         
         <h2>Deactive Employees</h2>
-        {this.deactiveEmployees().map(e => <Employee info={e}/>)}
+        {this.deactiveEmployees().map(e => <Employee  key={e.id} info={e}  toggleStatus={this.toggleActiveStatus.bind(null, e.id)}/>)}
 
       </div>
     )
