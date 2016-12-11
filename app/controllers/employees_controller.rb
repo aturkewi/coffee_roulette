@@ -8,7 +8,9 @@ class EmployeesController < ApplicationController
   
   def update
     binding.pry
-    render json: {message: 'Got it!'}
+    employee = Employee.find_by(id: params["id"])
+    employee.toggleActive
+    render json: employee
   end
   
 end

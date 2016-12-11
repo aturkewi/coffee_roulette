@@ -10,4 +10,10 @@ class Employee < ActiveRecord::Base
     emps = coffee_dates.collect { | coffee_date | coffee_date.employees }
     emps.flatten.tap { | e | e.delete(self) }
   end
+  
+  def toggleActive
+    self.update(active: !self.active)
+    self
+  end
+  
 end

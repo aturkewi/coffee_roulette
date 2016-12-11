@@ -25,7 +25,6 @@ class Employees extends React.Component{
       body: JSON.stringify({ 'active': true })})
       .then(res => res.json())
       .then(json => console.log(json))
-    console.log(id);
   }
   
   activeEmployees(){
