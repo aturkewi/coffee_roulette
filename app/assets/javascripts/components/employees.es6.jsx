@@ -20,6 +20,11 @@ class Employees extends React.Component{
   
   toggleActiveStatus(id, e){
     e.preventDefault();
+    fetch(`/employees/${id}?&authenticity_token=${this.props.authenticity_token}`,
+      {method: 'PATCH',
+      body: JSON.stringify({ 'active': true })})
+      .then(res => res.json())
+      .then(json => console.log(json))
     console.log(id);
   }
   
@@ -34,7 +39,6 @@ class Employees extends React.Component{
   render(){
     return(
       <div>
-        
         <h2>Active Employees</h2>
         {this.activeEmployees().map(e => <Employee key={e.id} info={e} toggleStatus={this.toggleActiveStatus.bind(null, e.id)}/>)}
         <hr />

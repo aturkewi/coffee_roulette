@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   
   root 'apps#index'
   
-  get '/employees' => 'employees#index'
+  resources :employees, only: [:index, :update]
+  
+  # get '/employees' => 'employees#index'
+  # patch '/employees/:id' => 'employees#update'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
