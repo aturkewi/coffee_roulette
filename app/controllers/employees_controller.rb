@@ -7,7 +7,6 @@ class EmployeesController < ApplicationController
   end
   
   def update
-    binding.pry
     employee = Employee.find_by(id: params["id"])
     employee.toggleActive
     render json: employee

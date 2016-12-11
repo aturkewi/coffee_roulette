@@ -6,6 +6,7 @@ class Employees extends React.Component{
     this.activeEmployees = this.activeEmployees.bind(this);
     this.deactiveEmployees = this.deactiveEmployees.bind(this);
     this.toggleActiveStatus = this.toggleActiveStatus.bind(this);
+    this.updateEmployees = this.updateEmployees.bind(this);
     
     this.state={
       employees:[]
@@ -24,7 +25,12 @@ class Employees extends React.Component{
       {method: 'PATCH',
       body: JSON.stringify({ 'active': true })})
       .then(res => res.json())
-      .then(json => console.log(json))
+      .then(json => this.setState({employees: this.updateEmployees(json)}))
+  }
+  
+  updateEmployees(updatedE){
+    return this.state.employees.filter(e => e.id != updatedE.id)
+      .concat(updatedE)
   }
   
   activeEmployees(){
