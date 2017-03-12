@@ -5,7 +5,8 @@ class AddEmployee extends React.Component{
         <h3>Add new employee</h3>
         <form onSubmit={this.props.onSubmit}>
           <input name="employee[name]" placeholder="Employee Name"/>
-          <input name="employee[department]" placeholder="Department"/>
+          <input name="employee[email]" placeholder="Employee Email"/>
+          <input name="employee[department_attributes[name]]" placeholder="Department"/>
           <input type="submit" value="Add"/>    
         </form>
       </div>

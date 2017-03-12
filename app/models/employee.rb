@@ -6,6 +6,10 @@ class Employee < ActiveRecord::Base
   has_many :months, through: :coffee_dates
   scope :active, -> { where(active: true) }
 
+  def department_attributes=(attributes)
+    binding.pry
+  end
+
   def previous_coffee_mates
     emps = coffee_dates.collect { | coffee_date | coffee_date.employees }
     emps.flatten.tap { | e | e.delete(self) }
