@@ -4,6 +4,7 @@ gem 'factory_girl_rails'
 gem 'faker'
 gem "figaro"
 gem 'seed_dump'
+gem 'foreman', '~> 0.82.0'
 
 gem 'react-rails'
 
