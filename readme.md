@@ -21,6 +21,8 @@ The MVP of the project doesn't need any views, just the ability to take in emplo
  - `rake db:migrate` - to run all of the migrations
  - Optional: `rake db:seed` - uses Faker load up 5 random departments and 70 random employees. Create 12 coffee dates for each employee for the past 12 months. Note: seeding 12 months of coffee dates may take 10 - 20 seconds.
 
+Start app with `rake start`
+
 ## To do:
 
 ### Set up mailer

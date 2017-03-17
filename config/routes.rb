@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'apps#index'
   
   resources :employees, only: [:index, :update, :create]
+  get 'api/usersCount' => 'employees#count'
   
   # get '/employees' => 'employees#index'
   # patch '/employees/:id' => 'employees#update'

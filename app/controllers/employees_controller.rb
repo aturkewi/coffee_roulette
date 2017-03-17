@@ -22,6 +22,10 @@ class EmployeesController < ApplicationController
     render json: employee
   end
   
+  def count
+    render json: {count: Employee.count}
+  end
+  
   private
   
   def employee_params
