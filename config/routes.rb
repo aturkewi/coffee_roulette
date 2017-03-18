@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  get 'api/login' => 'sessions#create'
+
+  mount Knock::Engine => '/knock'
+  
   root 'apps#index'
   
   resources :employees, only: [:index, :update, :create]
