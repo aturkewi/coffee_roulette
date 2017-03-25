@@ -2,7 +2,7 @@ const createUser = (user) => {
   /*
     NOTE: THIS will only work for dev. This needs to be a dynamic URL for production
   */
-  // debugger;
+  debugger;
   return fetch('/api/v1/users', {
     method: 'POST',
     headers: {

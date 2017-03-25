@@ -1,18 +1,32 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { signUp, updateErrors, login } from './actions/authActions';
-import React, { Component } from 'react';
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-const App = (props) => {
+import Home from './components/Home';
+import SignUp from './components/auth/SignUp';
+import Login from './components/auth/Login';
+import { Route } from 'react-router-dom';
 
+
+const App = (props) => {
+  
+  // const childrenWithProps = React.Children.map(props.children,
+  //  (child) => React.cloneElement(child, {
+  //    actions: props.actions
+  //  })
+  // );
+  
   return (
     <div className="App">
       <div className="container">
         <div>My app component is on the dom</div>
         <div>
-          {props.children}
+          <Route exact path='/' component={Home} actions={props.actions}/>
+          <Route path="/signup" component={SignUp} actions={props.actions}/>
+          <Route path="/login" component={Login} actions={props.actions}/>
         </div>
       </div>
     </div>

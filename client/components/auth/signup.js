@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { isAuthenticated } from '../../services/authService';
+import { isAuthenticated } from '../../services/authService';
 
 export default class SignUp extends Component {
 
@@ -9,27 +9,23 @@ export default class SignUp extends Component {
   }
 
   componentWillMount() {
-    // if (isAuthenticated()) {
-    //   this.props.router.push('/games');
-    // }
+    if (isAuthenticated()) {
+      this.props.router.push('/games');
+    }
   }
 
   componentDidUpdate() {
-    // if (isAuthenticated()) {
-    //   this.props.router.push('/games');
-    // }
+    if (isAuthenticated()) {
+      this.props.router.push('/games');
+    }
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    
-    debugger;
-    
-    const { input } = this;
-    const { signUp } = this.props.actions;
 
-    console.log('submit is being handled')
-    
+    const { input } = this;
+    const { updateErrors, signUp } = this.props.actions;
+
     let user = {};
     let newErrors = [];
 
@@ -39,31 +35,33 @@ export default class SignUp extends Component {
         user[key] = value;
         continue;
       }
-      // newErrors.push(`The ${key} must not be blank`);
+      newErrors.push(`The ${key} must not be blank`);
     }
 
-    // if (!user.password || user.password.length < 8 || user.password.length > 24) {
-    //   newErrors.push("Password must be between 8 and 24 characters");
-    //   return updateErrors(newErrors);
-    // }
-    // 
-    // if (user.password !== user.passwordConfirmation) {
-    //   newErrors.push(`Your passwords do not match`);
-    // }
-    // 
-    // if (newErrors.length > 0) {
-    //   return updateErrors(newErrors);
-    // }
+    if (!user.password || user.password.length < 8 || user.password.length > 24) {
+      newErrors.push("Password must be between 8 and 24 characters");
+      return updateErrors(newErrors);
+    }
+
+    if (user.password !== user.passwordConfirmation) {
+      newErrors.push(`Your passwords do not match`);
+    }
+
+    if (newErrors.length > 0) {
+      return updateErrors(newErrors);
+    }
 
     this.input = {};
-    console.log(signUp)
     return signUp(user);
   }
 
   render() {
 
+    const errorMessages = this.props.errors.map((error, index) => <p key={index} >{error}</p>);
+
     return(
       <div>
+        {errorMessages}
         <form onSubmit={(event) => this.handleSubmit(event)}>
           <div>
             <label htmlFor="firstName">First Name</label>
