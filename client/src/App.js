@@ -8,29 +8,32 @@ import './App.css';
 import Home from './components/Home';
 import SignUp from './components/auth/SignUp';
 import Login from './components/auth/Login';
-import { Route } from 'react-router-dom';
+import NavBar from './components/NavBar'
+import Routes from './Routes';
 
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch
+} from 'react-router-dom'
 
-const App = (props) => {
-  
-  // const childrenWithProps = React.Children.map(props.children,
-  //  (child) => React.cloneElement(child, {
-  //    actions: props.actions
-  //  })
-  // );
-  
-  return (
-    <div className="App">
-      <div className="container">
-        <div>My app component is on the dom</div>
+class App extends React.Component {
+
+  render() {
+    return (
+      <Router>
         <div>
-          <Route exact path='/' component={Home} actions={props.actions}/>
-          <Route path="/signup" component={SignUp} actions={props.actions}/>
-          <Route path="/login" component={Login} actions={props.actions}/>
+          <NavBar />
+          <div>
+            <Switch>
+              <Routes />
+            </Switch>
+          </div>
         </div>
-      </div>
-    </div>
-  );
+      </Router>
+    );
+  }
 }
 
 function mapStateToProps(state){
