@@ -3,11 +3,14 @@ class Api::V1::UsersController < ApplicationController
   
   def create
     binding.pry
+    User.create(user_params)
     render :json => {message: "Success!"}
   end
   
-  def pry
-    puts "Just trying to hit a pry here"
+  private
+  
+  def user_params
+    params.permit(:name, :username, :email, :password, :passwordConfirmation)
   end
   
 end
