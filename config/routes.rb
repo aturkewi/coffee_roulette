@@ -9,6 +9,13 @@ Rails.application.routes.draw do
   resources :employees, only: [:index, :update, :create]
   get 'api/usersCount' => 'employees#count'
   
+  namespace :api do
+    namespace :v1 do
+      post 'users' => 'users#create'
+      get 'pry' => 'users#pry'
+    end
+  end
+  
   # get '/employees' => 'employees#index'
   # patch '/employees/:id' => 'employees#update'
   # The priority is based upon order of creation: first created -> highest priority.
