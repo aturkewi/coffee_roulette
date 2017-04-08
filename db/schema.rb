@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160704160808) do
+ActiveRecord::Schema.define(version: 20170408192159) do
 
   create_table "coffee_dates", force: :cascade do |t|
     t.integer  "month_id"
@@ -45,6 +45,15 @@ ActiveRecord::Schema.define(version: 20160704160808) do
     t.datetime "start_day"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "username"
+    t.string   "passwordDigest"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
 end
