@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 // import { isAuthenticated } from '../../services/authService';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as authActions from '../../actions/authActions';
 
-export default class SignUp extends Component {
+class SignUp extends Component {
 
   constructor(props) {
     super(props);
@@ -22,13 +25,9 @@ export default class SignUp extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    
-    debugger;
-    
+        
     const { input } = this;
     const { signUp } = this.props.actions;
-
-    console.log('submit is being handled')
     
     let user = {};
     let newErrors = [];
@@ -66,16 +65,9 @@ export default class SignUp extends Component {
       <div>
         <form onSubmit={(event) => this.handleSubmit(event)}>
           <div>
-            <label htmlFor="firstName">First Name</label>
+            <label htmlFor="name">Name</label>
             <input
-              ref={node => this.input.firstName = node}
-              type="text"
-            />
-          </div>
-          <div>
-            <label htmlFor="lastName">Last Name</label>
-            <input
-              ref={node => this.input.lastName = node}
+              ref={node => this.input.name = node}
               type="text"
             />
           </div>
@@ -117,3 +109,10 @@ export default class SignUp extends Component {
   }
   
 };
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(authActions, dispatch)
+  };
+}
+export default connect(null, mapDispatchToProps)(SignUp);
