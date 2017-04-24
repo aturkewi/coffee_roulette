@@ -2,7 +2,7 @@ const createUser = (user) => {
   /*
     NOTE: THIS will only work for dev. This needs to be a dynamic URL for production
   */
-  debugger;
+  // debugger
   return fetch('/api/v1/users', {
     method: 'POST',
     headers: {
@@ -18,14 +18,14 @@ const createUser = (user) => {
     .catch(err => err);
 }
 
-const loginUser = (username, password) => {
+const loginUser = (email, password) => {
   return fetch('/api/v1/login', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({username, password})
+    body: JSON.stringify({email, password})
   })
     .then((response) => {
       console.log(response)

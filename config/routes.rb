@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
   
-  get 'api/login' => 'sessions#create'
-
   mount Knock::Engine => '/knock'
   
   root 'apps#index'
@@ -12,6 +10,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post 'users' => 'users#create'
+      post 'login' => 'sessions#create'
     end
   end
   

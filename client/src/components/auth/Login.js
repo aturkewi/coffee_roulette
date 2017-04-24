@@ -1,44 +1,57 @@
-import React from 'react';
+import React from 'react';  
+import {bindActionCreators} from 'redux';  
+import {connect} from 'react-redux';  
+import * as authActions from '../../actions/authActions';
+import TextInput from '../common/TextInput'
 
-export default (props) => {
-  console.log('ping')
-
-  const { login } = props
-
-  let input = {};
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    let username = input['username'].value.trim();
-    let password = input['password'].value.trim();
-    
-    input={};
-    login(username, password);
+class Login extends React.Component {  
+  constructor(props) {
+    super(props);
+    this.state = {credentials: {email: '', password: ''}}
+    this.onChange = this.onChange.bind(this);
+    this.onSave = this.onSave.bind(this);
   }
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">User Name</label>
-          <input
-            ref={node => input.username = node}
-            type="text"
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            ref={node => input.password = node}
+
+  onChange(event) {
+    const field = event.target.name;
+    const credentials = this.state.credentials;
+    credentials[field] = event.target.value;
+    return this.setState({credentials: credentials});
+  }
+
+  onSave(event) {
+    event.preventDefault();
+    this.props.actions.login(this.state.credentials);
+  }
+
+  render() {
+    return (
+      <div>
+        <form>
+          <TextInput
+            name="email"
+            label="email"
+            value={this.state.credentials.email}
+            onChange={this.onChange}/>
+
+          <TextInput
+            name="password"
+            label="password"
             type="password"
-          />
-        </div>
-        <input
-          type="submit"
-          value="Login" 
-          />
-      </form>
-    </div>
-  )
-  
+            value={this.state.credentials.password}
+            onChange={this.onChange}/>
+
+          <input
+            type="submit"
+            className="btn btn-primary"
+            onClick={this.onSave}/>
+        </form>
+      </div>    
+  );
+  }
 }
+
+function mapDispatchToProps(dispatch){  
+  return { actions: bindActionCreators(authActions, dispatch) };
+}
+export default connect(null, mapDispatchToProps)(Login);

@@ -95,7 +95,7 @@ class SignUp extends Component {
           <div>
             <label htmlFor="passwordConfirmation">Password Confirmation</label>
             <input
-              ref={node => this.input.passwordConfirmation = node}
+              ref={node => this.input.password_confirmation = node}
               type="password"
             />
           </div>

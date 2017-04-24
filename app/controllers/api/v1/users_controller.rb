@@ -2,9 +2,9 @@ class Api::V1::UsersController < ApplicationController
   skip_before_action :authenticate
   
   def create
-    binding.pry
-    User.create(user_params)
-    render :json => {message: "Success!"}
+    user = User.create(user_params)
+    jwt = Auth.issue({user: user.id})
+    render :json => {jwt: jwt}
   end
   
   private
